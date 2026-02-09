@@ -11,8 +11,8 @@ Implement the control logic for a simulated underwater ROV using differential st
 
 ### Key Features
 * **Dual Control Modes:**
-  * **Button-based movement controls:** Discrete steps for maneuvering with emergency stop functionality
-  * **Joystick-based continuous control:** Fluid analog input handling with proportional response
+  * Button-based movement controls
+  * Joystick-based continuous control
 
 * **Advanced Differential Drive:**
   * Tank-style steering algorithm with motor mixing
@@ -95,9 +95,9 @@ These classes were selected due to their prevalence in marine pollution and thei
 
 2. **Dataset Partitioning:**  
    The dataset was split prior to augmentation to minimize data leakage:
-   - **Train:** 78% – model learning  
-   - **Validation:** 11% – monitoring generalization during training  
-   - **Test:** 11% – final evaluation on unseen data  
+   - **Train:** – model learning  
+   - **Validation:** – monitoring generalization during training  
+   - **Test:** – final evaluation on unseen data  
 
 3. **Model Architecture:**  
    Training was performed using **YOLO26 (Ultralytics)**, selected for its balance between detection accuracy and computational efficiency.
