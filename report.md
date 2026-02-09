@@ -36,13 +36,27 @@ A YOLO26 nano model (YOLO26n) was trained using the Ultralytics framework. The n
 
 - **Epochs**: 100  
 - **Batch size**: 8  
-- **Input resolution**: 640×640  
-
+- **Input resolution**: 640×640
+   
 The model was initialized with pretrained weights and configured to detect the three custom classes. Training was conducted using Ultralytics’ training API, which provided real-time validation metrics at each epoch. Model checkpoints were saved throughout training, and the best-performing model (based on validation mAP) was retained as `best.pt` and also exported to ONNX (`best.onnx`) format.
 
 The ONNX model was verified to produce equivalent detection results, ensuring compatibility with systems where a Python or PyTorch runtime may not be available. The training process proceeded smoothly without interruption, and no overfitting was observed, as validation metrics continued to improve consistently throughout training.
 
 ---
+### Inference Results and Observations
+
+**Inference Configuration:** The trained model was evaluated on the held-out test set (105 images) with a confidence threshold of 0.5.
+
+**Performance Summary:**
+- **High Overall Accuracy:** The model successfully detected waste objects in the majority of test images, achieving a detection rate of approximately 95–96%.
+- **Failure Cases:** Missed detections (4–5 images) occurred primarily in visually challenging conditions:
+  - Transparent or low-contrast objects (clear bottles, thin polythene)
+  - Cluttered scenes with multiple object types
+  - Scenarios where waste objects visually blended with backgrounds
+  - Complex scenes where the model occasionally failed to detect any objects despite visible waste
+
+These limitations reflect real-world underwater perception challenges rather than model overfitting. The model's conservative behavior in cluttered or ambiguous conditions while reducing false positives can lead to missed detections. In operational settings, complementary approaches such as temporal tracking, adaptive confidence thresholds, or sensor fusion could help mitigate these cases.
+
 ## Training Performance and Evaluation
 
 ### Training Box Loss vs Epochs
@@ -75,6 +89,15 @@ The confusion matrix shows strong class separation with minimal inter-class conf
   <img src="problem-3-ml/performanceGraphs/confusion_matrix_normalized.png" width="500">
 </p>
 
+## **Failure Cases and Model Limitations**
+
+Despite strong overall performance, the model failed to detect certain waste objects in a small subset of test images. These failure cases were observed primarily under visually challenging conditions, including transparent objects, cluttered backgrounds, and non-marine visual contexts.
+
+In several instances, clear plastic bottles and thin polythene materials were not detected when placed against visually similar backgrounds or when the object boundaries lacked strong contrast. Transparent plastic items, in particular, present minimal edge information and weak texture cues, making them difficult to distinguish from the background even for human observers. Additionally, some test images contained multiple object types or materials outside the trained class distribution, which reduced detection confidence at the chosen threshold (conf = 0.5).
+
+These failure cases highlight a known limitation of vision-based object detection systems: the model can only detect objects that exhibit sufficient visual features aligned with its training data. While data augmentation improved robustness, extreme cases such as high transparency, strong background blending, or atypical object contexts remain challenging.
+
+Importantly, these missed detections do not indicate model overfitting or instability, but rather reflect realistic operational constraints of underwater perception. In real marine deployments, such scenarios would benefit from complementary sensing approaches (e.g., temporal tracking across video frames, adaptive confidence thresholds, or fusion with non-visual sensors like sonar) to reduce false negatives under difficult conditions.
 ## **Marine Environment Limitations and Considerations**
 
 A critical aspect of this project is understanding the marine environment’s limitations and how they affect object detection reliability. Underwater computer vision is inherently challenging due to several factors:
