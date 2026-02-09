@@ -1,8 +1,8 @@
-# **Underwater Waste Detection using YOLOv26**
+# **Underwater Waste Detection using YOLO26**
 
 ## **Project Objective**
 
-Develop a custom YOLOv26 object detection model to identify underwater waste (bottles, polythene, and styrofoam). This report outlines the end-to-end pipeline, from dataset preparation to model training, evaluation, and export, with a focus on avoiding data leakage and demonstrating critical reasoning regarding marine environment limitations.
+Develop a custom YOLO26 object detection model to identify underwater waste (bottles, polythene, and styrofoam). This report outlines the end-to-end pipeline, from dataset preparation to model training, evaluation, and export, with a focus on avoiding data leakage and demonstrating critical reasoning regarding marine environment limitations.
 
 ---
 
@@ -85,7 +85,7 @@ Underwater scenes often suffer from turbid water filled with sediment, plankton,
 
 ### **Lighting Distortion and Color Degradation**
 
-Sunlight diminishes rapidly with depth, and water selectively absorbs longer wavelengths, causing red and orange hues to disappear and leaving a dominant blue-green tone. Additionally, light refraction and scattering lead to spatial distortion and uneven illumination, resulting in bright highlights and dark shadows within the same frame. Consequently, object colors may be significantly altered, and overall contrast is reduced. Although the model learned features that are partially invariant to color and was exposed to color jitter augmentation, extreme lighting conditions—such as strong backscatter from ROV lights at night—may still confuse the detector. Addressing these challenges may require advanced preprocessing techniques such as underwater color correction or image dehazing prior to inference.
+Sunlight diminishes rapidly with depth, and water selectively absorbs longer wavelengths, causing red and orange hues to disappear and leaving a dominant blue-green tone. Additionally, light refraction and scattering lead to spatial distortion and uneven illumination, resulting in bright highlights and dark shadows within the same frame. Consequently, object colors may be significantly altered, and overall contrast is reduced. Although the model learned features that are partially invariant to color and was exposed to color jitter augmentation, extreme lighting conditions such as strong backscatter from ROV lights at night may still confuse the detector. Addressing these challenges may require advanced preprocessing techniques such as underwater color correction or image dehazing prior to inference.
 
 ### **Biological Camouflage and Biofouling**
 
@@ -107,6 +107,6 @@ The depth of critical reasoning applied here ensures that the system’s limitat
 
 ## **Conclusion**
 
-In summary, an underwater waste dataset was successfully curated , trained a YOLOv26n model to detect key waste categories, and achieved strong performance on unseen test data. The complete pipeline—from annotation in Roboflow to inference on novel images—was implemented end to end, meeting all specified requirements. All required performance graphs (mAP curves, loss curves, and confusion matrix) have been included to support the evaluation.
+In summary, an underwater waste dataset was successfully curated , trained a YOLO26n model to detect key waste categories and achieved strong performance on unseen test data. The complete pipeline, from annotation in Roboflow to inference on novel images was implemented end to end, meeting all specified requirements. All required performance graphs (mAP curves, loss curves, and confusion matrix) have been included to support the evaluation.
 
 Beyond raw performance metrics, the model’s behavior was critically analyzed under realistic marine conditions. By acknowledging challenges such as duplicate images, underwater visibility degradation, and biological camouflage, this work presents a clear understanding of the model’s reliability bounds. Future improvements may include expanding the dataset to cover a wider range of underwater conditions and incorporating specialized preprocessing techniques to mitigate turbidity and visual distortion.
