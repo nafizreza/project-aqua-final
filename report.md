@@ -89,15 +89,6 @@ The confusion matrix shows strong class separation with minimal inter-class conf
   <img src="problem-3-ml/performanceGraphs/confusion_matrix_normalized.png" width="500">
 </p>
 
-## **Failure Cases and Model Limitations**
-
-Despite strong overall performance, the model failed to detect certain waste objects in a small subset of test images. These failure cases were observed primarily under visually challenging conditions, including transparent objects, cluttered backgrounds, and non-marine visual contexts.
-
-In several instances, clear plastic bottles and thin polythene materials were not detected when placed against visually similar backgrounds or when the object boundaries lacked strong contrast. Transparent plastic items, in particular, present minimal edge information and weak texture cues, making them difficult to distinguish from the background even for human observers. Additionally, some test images contained multiple object types or materials outside the trained class distribution, which reduced detection confidence at the chosen threshold (conf = 0.5).
-
-These failure cases highlight a known limitation of vision-based object detection systems: the model can only detect objects that exhibit sufficient visual features aligned with its training data. While data augmentation improved robustness, extreme cases such as high transparency, strong background blending, or atypical object contexts remain challenging.
-
-Importantly, these missed detections do not indicate model overfitting or instability, but rather reflect realistic operational constraints of underwater perception. In real marine deployments, such scenarios would benefit from complementary sensing approaches (e.g., temporal tracking across video frames, adaptive confidence thresholds, or fusion with non-visual sensors like sonar) to reduce false negatives under difficult conditions.
 ## **Marine Environment Limitations and Considerations**
 
 A critical aspect of this project is understanding the marine environment’s limitations and how they affect object detection reliability. Underwater computer vision is inherently challenging due to several factors:
