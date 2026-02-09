@@ -43,7 +43,7 @@ The model was initialized with pretrained weights and configured to detect the t
 The ONNX model was verified to produce equivalent detection results, ensuring compatibility with systems where a Python or PyTorch runtime may not be available. The training process proceeded smoothly without interruption, and no overfitting was observed, as validation metrics continued to improve consistently throughout training.
 
 ---
-### Inference Results and Observations
+## **Inference Results and Observations**
 
 **Inference Configuration:** The trained model was evaluated on the held-out test set (105 images) with a confidence threshold of 0.5.
 
