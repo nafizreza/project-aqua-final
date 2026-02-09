@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Club Recruitment Task</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Project Aqua ROV Control Simulation</h1>
+            <p>Mission: Navigate the underwater rover using your code!</p>
+        </header>
+
+        <div class="simulation-view">
+            <div class="view-panel">
+                <h2>Top View (X-Y)</h2>
+                <canvas id="topView" width="400" height="400"></canvas>
+            </div>
+            <div class="view-panel">
+                <h2>Side View (Depth)</h2>
+                <canvas id="sideView" width="400" height="400"></canvas>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <div class="mode-switch">
+                <label class="switch">
+                    <input type="checkbox" id="controlToggle">
+                    <span class="slider round"></span>
+                </label>
+                <span id="modeLabel">Button Control</span>
+            </div>
+
+            <!-- Button Control Panel -->
+            <div id="button-controls" class="control-panel active">
+                <div class="panel-group">
+                    <h3>Navigation</h3>
+                    <div class="d-pad-grid">
+                        <button id="btn-forward" class="d-pad-btn up" title="Forward"><i
+                                class="fa-solid fa-caret-up"></i></button>
+                        <button id="btn-left" class="d-pad-btn left" title="Turn Left"><i
+                                class="fa-solid fa-caret-left"></i></button>
+                        <button id="btn-right" class="d-pad-btn right" title="Turn Right"><i
+                                class="fa-solid fa-caret-right"></i></button>
+                        <button id="btn-backward" class="d-pad-btn down" title="Backward"><i
+                                class="fa-solid fa-caret-down"></i></button>
+                    </div>
+                </div>
+                <div class="panel-group">
+                    <h3>Depth</h3>
+                    <div class="btn-grid">
+                        <button id="btn-ascend" title="Ascend"><i class="fa-solid fa-chevron-up"></i></button>
+                        <button id="btn-descend" title="Descend"><i class="fa-solid fa-chevron-down"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Joystick Control Panel -->
+            <div id="joystick-controls" class="control-panel hidden">
+                <div class="joystick-wrapper">
+                    <h3>Movement (Left Stick)</h3>
+                    <div id="stick1" class="joystick-base">
+                        <div class="joystick-stick"></div>
+                    </div>
+                    <p>Forward/Back/Turn</p>
+                </div>
+                <div class="joystick-wrapper">
+                    <h3>Depth (Right Stick)</h3>
+                    <div id="stick2" class="joystick-base">
+                        <div class="joystick-stick"></div>
+                    </div>
+                    <p>Up/Down</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="engine.js"></script>
+    <script src="student_task.js"></script>
+</body>
+
+</html>

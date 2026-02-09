@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ROV Telemetry Monitoring System</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #0b1220;
+    }
+    /* Prominent visual alert when system enters CRITICAL state (whole screen blink for 5 sec) */
+        
+    body.critical-blink::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.18); 
+      pointer-events: none;
+      z-index: 9999;
+      animation: screenBlink 1s 5 forwards;
+    }
+    @keyframes screenBlink {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    .top-bar {
+        background: #131d31;   
+        color: #ffffff;
+        padding: 1%;
+    }
+    .top-bar .small { color: #c9d1e6; margin-top: 4px; font-size: 12px; }
+    .top-bar h1 { margin: 0; color:#48c2ff }
+
+    .main-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+        margin:24px;
+        
+    }
+
+    
+    @media (max-width: 900px) {
+      canvas { max-width: 100%; }
+    }
+
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 950px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px; }
+    .card h2 { color: #ffffff; }
+
+    #statusBox { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    #statusBox.warning::after  { content: "⚠️"; }
+    #statusBox.critical::after { content: "🚨"; }
+
+
+    #statusBox.warning::after,
+    #statusBox.critical::after {
+      position: relative;
+      top: -.5px;          
+      line-height: 1;     
+    }
+
+    .label { color: #555; font-size: 12px; }
+    .value {
+      font-size: 24px;
+      margin-top: 6px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .sensor-card {
+      background: #131d31;
+      border: 2px solid #70cfff; 
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+    }
+
+
+    .status {
+      font-weight: bold;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-size: 20px;
+    
+    }
+    .normal {
+      background: #1f7a4d;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 12px rgba(46, 163, 106, 0.7);
+   }
+
+    .warning {
+        background: #8a6a1f;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+        box-shadow: 0 0 12px rgba(209, 164, 58, 0.7);
+    }
+
+    .critical {
+      background: #7a1f1f;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 14px rgba(255, 107, 107, 0.9);
+    }
+
+    .error { background: #e8e8e8; border: 1px solid #999; color: #333;}
+    .small { color: #666; margin-top:-20px; margin-bottom:20px; font-size: 12px; }
+    canvas { max-width: 900px; }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <h1>ROV Telemetry Monitoring System</h1>
+    <div class="small">
+        a real-time telemetry monitoring system for an underwater Remotely Operated Vehicle (ROV)
+    </div>
+  </div>
+
+  <div class="main-layout">
+  <!-- LEFT: Sensor values -->
+    <div class="grid">
+      <div class="card sensor-card ">
+        <div class="label">Depth (m)</div>
+        <div id="depth" class="value">--</div>
+      </div>
+      <div class="card sensor-card">
+        <div class="label">Pressure (bar)</div>
+        <div id="pressure" class="value">--</div>
+      </div>
+      <div class="card sensor-card">
+        <div class="label">Temperature (°C)</div>
+        <div id="temperature" class="value">--</div>
+      </div>
+      <div class="card sensor-card">
+        <div class="label">Direction (°)</div>
+        <div id="direction" class="value">--</div>
+      </div>
+      <div class="card sensor-card" style="grid-column: 1 / -1;">
+        <div class="label">Timestamp</div>
+        <div id="timestamp" class="value">--</div>
+      </div>
+      <div id="statusBox" class="status normal" style="grid-column: 1 / -1;">STATUS: NORMAL</div>
+    </div>
+
+    <!-- RIGHT: chart -->
+    <div class="card sensor-card">
+      <h2 style="margin-top:0;">Depth vs Time</h2>
+      <canvas id="depthChart" height="160"></canvas>
+    </div>
+
+  </div>
+
+
+  <!-- Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./script.js"></script>
+</body>
+
+</html>
