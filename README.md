@@ -1,6 +1,5 @@
-# 🌊 Project Aqua – Software Subteam Recruitment 2026
-
-This repository contains my submission for the **Project Aqua 2026 Software Subteam Technical Evaluation**. The project covers ROV control logic, real-time telemetry monitoring, and a custom underwater waste detection ML pipeline using YOLO26.
+# 🌊 Project Aqua 
+The project covers ROV control logic, real-time telemetry monitoring, and a custom underwater waste detection ML pipeline using YOLO26.
 
 ---
 
